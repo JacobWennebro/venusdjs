@@ -1,0 +1,28 @@
+{
+  "name": "venusdjs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./src/index",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Jacob Wennebro",
+  "license": "ISC",
+  "dependencies": {
+    "apicache": "^1.4.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "discord.js": "^11.5.1",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "generate-password": "^1.4.2",
+    "generate-schema": "^2.6.0",
+    "ip": "^1.1.5",
+    "jsdom": "^15.1.1",
+    "redis": "^2.8.0",
+    "sass": "^1.21.0",
+    "sharp": "^0.22.1",
+    "socket.io": "^2.2.0",
+    "unzipper": "^0.10.1"
+  }
+}

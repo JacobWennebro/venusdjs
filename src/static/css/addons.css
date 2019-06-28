@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    font-family: 'Roboto';
+    overflow-x: hidden;
+}
+
+.commands {
+    width: 15vw;
+    height: 100vh;
+    background: #FFF;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    -webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+}
+.commands h1 {
+    font-size: 1rem;
+}
+
+.wrapper {
+    width: 85vw;
+    height: auto;
+    vertical-align: top;
+    margin-top: 1em;
+    margin-left: 1em;
+    overflow-y: scroll;
+}
+.wrapper::-webkit-scrollbar {
+    display: none;
+}
+.wrapper #instance {
+    padding: 0.5em;
+    width: 70%;
+    text-align: left;
+    height: 10vh;
+    margin: 1em auto;
+    position: relative;
+    background: #333;
+    color: #FFF;
+    display: inline-block;
+    border-left: 5px solid #00caff;
+    border-radius: 0.1em;
+    -webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+}
+.wrapper #instance img {
+    height: 100%;
+    width: auto;
+    background: #d3d3d3;
+    border-radius: 0.3em;
+}
+.wrapper #instance p {
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 2em;
+    position: relative;
+    top: 50%;
+    transform: translateY(-100%);
+    word-break: break-all;
+    max-width: 80%;
+}
+.wrapper #instance span#developer {
+    color: #d3d3d3;
+    font-size: 0.8rem;
+}
+.wrapper #instance span#desc {
+    font-size: 0.8rem;
+}
+.wrapper #instance span#name {
+    font-size: 1rem;
+    color: #00caff;
+}

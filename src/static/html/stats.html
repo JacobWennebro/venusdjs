@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+	<link href="/css/stats.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+
+	<div class="wrapper">
+		
+		<h1 id="title">Statistics</h1>
+		
+		<div id="instance">
+			<canvas id="uptime" class="chart" width="400" height="400"></canvas>
+		</div>
+		<div id="instance">
+			<canvas id="cpu" class="chart" width="400" height="400"></canvas>
+		</div>
+		<div id="instance">
+			<canvas id="commandsUsed" class="chart" width="400" height="400"></canvas>
+		</div>
+		<div id="instance">
+			<canvas id="guildActivity" class="chart" width="400" height="400"></canvas>
+		</div>
+	</div>
+
+
+	<script>
+		let commandsUsed = document.getElementById('commandsUsed').getContext('2d');
+		let uptime = document.getElementById('uptime').getContext('2d');
+		let cpu = document.getElementById("cpu").getContext("2d");
+		let guildActivity = document.getElementById('guildActivity').getContext('2d');
+		
+		Chart.defaults.global.defaultFontColor = "#fff";
+
+		let RamChart = new Chart(uptime, {
+			type: 'line',
+			data: {
+				labels: ['1m', '2m', '3m', '4m', '5m'],
+				datasets: [{
+					label: 'RAM Usage (%) Entire System',
+					data: [null, null, null, null, null],
+					backgroundColor: [
+						'rgba(0, 202, 255, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+					],
+					borderColor: [
+						'rgba(0, 202, 255, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)'
+					],
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							borderWidth: 1,
+							responsive: true,
+							maintainAspectRatio: false,
+							beginAtZero: true,
+							min: 0,
+							max: 100,
+							suggestedMax: 100,
+							precision: 1,
+						}
+					}]
+				}
+			},
+		});
+		
+		
+		let cpuChart = new Chart(cpu, {
+			type: 'line',
+			data: {
+				labels: ['1m', '2m', '3m', '4m', '5m'],
+				datasets: [{
+					label: 'CPU Usage (%) Entire System',
+					data: [null, null, null, null, null],
+					backgroundColor: [
+						'rgba(0, 202, 255, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+					],
+					borderColor: [
+						'rgba(0, 202, 255, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)'
+					],
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							borderWidth: 1,
+							responsive: true,
+							maintainAspectRatio: false,
+							beginAtZero: true,
+							min: 0,
+							max: 100,
+							suggestedMax: 100,
+							precision: 1,
+						}
+					}]
+				}
+			},
+		});
+
+
+		let cmdChart = new Chart(commandsUsed, {
+			type: 'line',
+			data: {
+				labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+				datasets: [{
+					label: 'Commands used (weekly)',
+					data: [0, 0, 0, 0, 0, 0, 0],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)',
+						'rgba(255, 159, 64, 0.2)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)',
+						'rgba(255, 159, 64, 0.2)'
+					],
+					borderWidth: 1,
+					responsive: true,
+					maintainAspectRatio: false
+				}]
+			},
+		});
+
+		let guildActivityChart = new Chart(guildActivity, {
+			type: 'doughnut',
+			data: {
+				labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+				datasets: [{
+					label: 'Commands used',
+					data: [0, 0, 0, 0, 0, 0, 0],
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+						'rgba(255, 159, 64, 0.2)',
+						'rgba(255, 159, 64, 0.2)'
+					],
+					borderColor: [
+						'rgba(255, 99, 132, 1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+						'rgba(255, 159, 64, 1)',
+						'rgba(255, 159, 64, 0.2)'
+					],
+					borderWidth: 1,
+					responsive: true,
+					maintainAspectRatio: false
+				}]
+			},
+		});
+
+		const dates = (current) => {
+			let week = new Array();
+			for (let i = 0; i < 7; i++) {
+				week.push(
+					new Date(current)
+				);
+				current.setDate(current.getDate() - 1);
+			}
+			return week;
+		};
+
+		fetch('/stats-api/commandUsage').then(res => { return res.json() }).then(commandUsages => {
+			let start = new Date();
+			let week = dates(start);
+			
+			Object.keys(commandUsages).forEach(commandUsagekey => {
+				let commandUsage = commandUsages[commandUsagekey];
+				for (let day in week) {
+				if (!commandUsage["uses"][week[day].toDateString()]) continue;
+				console.log(new Date(commandUsage["uses"][week[day].toDateString()]).getDay());
+				console.log(cmdChart.data.datasets[0].data);
+				cmdChart.data.datasets[0].data[new Date(week[day]).getDay() -1] += commandUsage["uses"][week[day].toDateString()];
+				cmdChart.update();
+			}});
+		});
+
+		let sock = io.connect(location.protocol + "//" +location.host);
+		let ramTime = 0;
+		let cpuTime = 0;
+
+		sock.on("usage", (usageData) => {
+			if(ramTime > 4) ramTime = 0;
+			if(cpuTime > 4) cpuTime = 0;
+			let ramPercent = ( usageData["freeMem"] / usageData["totalMem"] ) * 100;
+			let cpuPercent = usageData["cpu"];
+			cpuChart.data.datasets[0].data[cpuTime] = Math.floor(cpuPercent);
+			RamChart.data.datasets[0].data[ramTime] = Math.floor(ramPercent);
+			RamChart.update();
+			cpuChart.update();
+			cpuTime++;
+			ramTime++;
+			console.log(`cpu: ${cpuPercent}, ram: ${ramPercent}`);
+		});	
+
+		
+	</script>
+</body>
+
+</html>

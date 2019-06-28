@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+		<link href="/css/animate.css" rel="stylesheet" type="text/css">
+		<link href="/css/guilds.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		
+		<div class="wrapper" id="instances">
+		    
+		    
+		</div>
+		
+		<script>
+			/*global fetch*/
+			fetch('/guild-api/invites').then(res => { return res.json() }).then(invites => {
+				    
+				    let wrapper = document.getElementById('instances');
+				    
+					fetch('/guild-api/guilds').then(res => { return res.json() }).then(guilds => {
+						guilds.forEach(guild => {
+						
+							let guildInvite = invites[guild.id];
+						   
+	    				    let instance = document.createElement('div');
+	                            instance.setAttribute('id', 'instance');
+	                        
+	                            let img = document.createElement('img');
+	                                img.src = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`;
+	    					
+	    					
+	                        let text = document.createElement('p');
+	                        
+	                        if(guildInvite !== undefined) {
+	                        	text.innerHTML = `
+		                            <span id="name">${guild.name}</span>
+		                            <br/>
+		                            <span id="info">${guild.region} &bull; ${guild.memberCount} members</span>
+		                            <br/>
+		                            <a href="https://discordapp.com/invite/${guildInvite}" target="_blank"><button>Join Guild</button></a>
+	                            
+	                            `	
+	                        }
+	                        else {
+	                        	text.innerHTML = `
+	                        		<span id="name">${guild.name}</span>
+		                            <br/>
+		                            <span id="info">${guild.region} &bull; ${guild.memberCount} members</span>
+		                            <br/>
+		                            <a><button id="deny">Invite not available</button></a>
+	                        	`
+	                        }
+	    
+	                        instance.appendChild(img);
+	                        instance.appendChild(text);
+	    
+	    					instance.style.webkitAnimation = 'fadeIn 0.5s forwards';
+	    
+	                        wrapper.appendChild(instance);
+						
+							
+						});
+					});
+			})
+			.catch(err => {
+				console.log(err);
+			});
+			
+		</script>
+	</body>
+</html>

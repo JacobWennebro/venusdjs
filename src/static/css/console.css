@@ -1,0 +1,46 @@
+body {
+    font-family: 'Roboto', 'sans-serif';
+    color: #FFF;
+}
+.console-wrapper {
+    width: 70vw;
+    margin: auto;
+}
+.console-wrapper .console {
+    width: 100%;
+    height: 70vh;
+    background: #111;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    color: #FFF;
+    overflow-y: scroll;
+    user-select: none;
+    position: relative;
+    font-size: 1rem;
+    font-family: 'VT323', 'Roboto', 'sans-serif';
+}
+.console-wrapper .console #bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    background: #000;
+    color: #00caff;
+    overflow: hidden;
+}
+#bar #input {
+    display: inline;
+    margin-left: 1em;
+}
+#bar #input span[contentEditable="true"] {
+    color: #FFF;
+    outline: none;
+}
+.console-wrapper .console::-webkit-scrollbar {
+    display: none;
+}
+.console-wrapper .console p {
+    margin: 0;
+}

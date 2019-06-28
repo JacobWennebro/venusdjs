@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="/css/config.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="header">
+        <button onclick="saveConfig()">Save config</button>
+        <select id="dropdown">
+            
+        </select>
+        <span id="changes"></span>
+    </div>
+
+    <script>
+        
+        let dropdown = document.getElementById('dropdown');
+        let editor;
+        let saveConfig;
+        
+        fetch('/config-api/all').then(res => { return res.json() }).then(json => {
+            json.forEach(config => {
+            
+                let option = document.createElement('option');
+                    option.value = config.replace('.json', '');
+                    option.innerText = config;
+                    
+                if(config === 'main-config.json') {
+                    option.setAttribute('selected', 'selected');
+                }
+                    
+                dropdown.appendChild(option);
+            });
+            
+                let loadConfig = () => {
+                    fetch('/config-api/config/'+dropdown.value).then(res => { return res.json() }).then(json => {
+                        let element = document.createElement('div');
+                        let changes = document.getElementById('changes');
+                        element.classList.add('editor')
+                        editor = new JSONEditor(element, {
+                            schema: json["schema"],
+                            form_name_root: null,
+                            disable_properties: true,
+                            disable_edit_json: true,
+                            disable_collapse: true,
+                        });
+            
+                        editor.on('ready', function () {
+                            editor.setValue(json["config"]);
+                            editor.validate();
+            
+                            document.body.appendChild(element);
+                        });
+            
+                        let i=0;
+                        editor.on('change',function(e) {
+                            if(i==0||i==1) {
+                                i++;
+                                return;
+                            }
+                            changes.innerHTML = 'changes have been made <a>(ctrl+s)</a>';
+                        });
+                        
+                        saveConfig = () => {
+
+                            console.log(json["schema"]);
+                            let config = {"config" : editor.getValue(), "schema" : json["schema"]};
+                                fetch('/config-api/configs/'+dropdown.value ,{ 
+                                    "method": "POST", 
+                                    "body" : JSON.stringify(config), 
+                                    "headers": { 
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                                
+                            console.log(config);
+                        
+                            changes.innerHTML = '<i>saved config<i/>'
+                        }        
+                
+                        
+                    });
+                }
+                loadConfig();
+                
+                dropdown.onchange = () => {
+                    editor.destroy();
+                    console.log(dropdown.value);
+                    loadConfig();
+                }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+        
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 's' && e.ctrlKey == true) {
+                e.preventDefault();
+                saveConfig();
+                console.log('Config Saved');
+            }
+        });
+
+    </script>
+</body>
+
+</html>

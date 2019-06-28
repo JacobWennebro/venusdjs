@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="/css/animate.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="/css/addons.css" type="text/css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/79d4f2646b.js"></script>
+    </head>
+    <body>
+        
+        <div class="wrapper" id="instances">
+            <!-- ADDONS LISTEN HERE BY JS -->
+        </div>
+        
+        <script>
+            
+            fetch('/addon-api/all').then(res => { return res.json() }).then(addons => {
+                
+                let wrapper = document.getElementById('instances');
+                
+                addons.forEach(addon => {
+                    console.log(addon);
+
+                    let instance = document.createElement('div');
+                        instance.setAttribute('id', 'instance');
+                    
+                    let img = document.createElement('img');
+                        if(typeof addon.manifest.image === 'undefined') {
+                            img.src = '/images/missing.png';   
+                        }
+                        else {
+                            img.src = '/images/@addon-'+addon.name+'.png';
+                        }
+
+                    let text = document.createElement('p');
+                        text.innerHTML = `
+                        
+                        <span id="name">${addon.name}</span>
+                        <br/>
+                        <span id="desc">${addon.manifest.description}</span>
+                        <br/>
+                        <span id="developer">Developed by ${addon.manifest.developer}</span>
+                        
+                        `
+
+                    instance.appendChild(img);
+                    instance.appendChild(text);
+
+                    instance.style.webkitAnimation = 'fadeIn 0.5s forwards';
+
+                    wrapper.appendChild(instance);
+
+                });
+
+            }).catch(e => console.error(e));
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,245 @@
+{
+    "config": {
+        "discord bot token": "> BOT TOKEN HERE <",
+        "web interface port": 8085,
+        "web interface title": "venus panel",
+        "presence": {
+            "use presence from config": true,
+            "type": 1,
+            "text": "github.com/JacobWennebro/venusdjs",
+            "url": "https://npmjs.com",
+            "status": "online"
+        },
+        "database": {
+            "host": "mpvp.pro",
+            "port": 6379,
+            "password": "747e1300bbcf2d5555bcff0699b914040e3203924c46af855c3298a4feed5eec"
+        },
+        "log global chat": true,
+        "vdjs embed theme color": "#FFFFFF",
+        "commands": {
+            "prefix": "v!",
+            "case sensitive": false
+        },
+        "operator users": [
+            "224260367696658432",
+            "132565259159470080"
+        ]
+    },
+    "schema": {
+        "definitions": {},
+        "$schema": "http://json-.org/draft-07/#",
+        "$id": "http://example.com/root.json",
+        "type": "object",
+        "title": "Venus Config ",
+        "required": [
+            "discord bot token",
+            "web interface port",
+            "web interface title",
+            "presence",
+            "database",
+            "log global chat",
+            "vdjs embed theme color",
+            "commands",
+            "operator users"
+        ],
+        "properties": {
+            "discord bot token": {
+                "$id": "#/properties/discord bot token",
+                "type": "string",
+                "title": " Discord bot token ",
+                "default": "",
+                "examples": [
+                    "NTkwMTM3ODI0NDI3MjQ1NTY5.XQd3hQ.5z8ePt8DAQPEbCasJRPQE5Lyd7Y"
+                ],
+                "pattern": "^(.*)$"
+            },
+            "web interface port": {
+                "$id": "#/properties/web interface port",
+                "type": "integer",
+                "title": " Web interface port ",
+                "default": 0,
+                "examples": [
+                    8085
+                ]
+            },
+            "web interface title": {
+                "$id": "#/properties/web interface title",
+                "type": "string",
+                "title": " Web interface title ",
+                "default": "",
+                "examples": [
+                    "venus panel"
+                ],
+                "pattern": "^(.*)$"
+            },
+            "presence": {
+                "$id": "#/properties/presence",
+                "type": "object",
+                "title": " Presence ",
+                "required": [
+                    "use presence from config",
+                    "type",
+                    "text",
+                    "status"
+                ],
+                "properties": {
+                    "use presence from config": {
+                        "$id": "#/properties/presence/properties/use presence from config",
+                        "type": "boolean",
+                        "title": " Use presence from config ",
+                        "default": false,
+                        "examples": [
+                            true
+                        ]
+                    },
+                    "type": {
+                        "$id": "#/properties/presence/properties/type",
+                        "type": "integer",
+                        "title": " Type ",
+                        "default": 0,
+                        "examples": [
+                            0
+                        ]
+                    },
+                    "text": {
+                        "$id": "#/properties/presence/properties/text",
+                        "type": "string",
+                        "title": " Text ",
+                        "default": "",
+                        "examples": [
+                            "github.com/JacobWennebro/venusdjs"
+                        ],
+                        "pattern": "^(.*)$"
+                    },
+                    "url": {
+                        "$id": "#/properties/presence/properties/url",
+                        "type": "string",
+                        "title": " URL ",
+                        "default": "",
+                        "examples": [
+                            "https://npmjs.com"
+                        ],
+                        "pattern": "^(.*)$"
+                    },
+                    "status": {
+                        "$id": "#/properties/presence/properties/status",
+                        "type": "string",
+                        "title": " Status ",
+                        "default": "",
+                        "examples": [
+                            "idle"
+                        ],
+                        "pattern": "^(.*)$"
+                    }
+                }
+            },
+            "database": {
+                "$id": "#/properties/database",
+                "type": "object",
+                "title": " Database ",
+                "required": [
+                    "host",
+                    "port",
+                    "password"
+                ],
+                "properties": {
+                    "host": {
+                        "$id": "#/properties/database/properties/host",
+                        "type": "string",
+                        "title": " Host ",
+                        "default": "",
+                        "examples": [
+                            "mpvp.pro"
+                        ],
+                        "pattern": "^(.*)$"
+                    },
+                    "port": {
+                        "$id": "#/properties/database/properties/port",
+                        "type": "integer",
+                        "title": " Port ",
+                        "default": 0,
+                        "examples": [
+                            6379
+                        ]
+                    },
+                    "password": {
+                        "$id": "#/properties/database/properties/password",
+                        "type": "string",
+                        "title": " Password ",
+                        "default": "",
+                        "examples": [
+                            "747e1300bbcf2d5555bcff0699b914040e3203924c46af855c3298a4feed5eec"
+                        ],
+                        "pattern": "^(.*)$"
+                    }
+                }
+            },
+            "log global chat": {
+                "$id": "#/properties/log global chat",
+                "type": "boolean",
+                "title": " Log global chat ",
+                "default": false,
+                "examples": [
+                    true
+                ]
+            },
+            "vdjs embed theme color": {
+                "$id": "#/properties/vdjs embed theme color",
+                "type": "string",
+                "title": " Vdjs embed theme color ",
+                "default": "",
+                "examples": [
+                    "#FFFFFF"
+                ],
+                "pattern": "^(.*)$"
+            },
+            "commands": {
+                "$id": "#/properties/commands",
+                "type": "object",
+                "title": " Commands ",
+                "required": [
+                    "prefix",
+                    "case sensitive"
+                ],
+                "properties": {
+                    "prefix": {
+                        "$id": "#/properties/commands/properties/prefix",
+                        "type": "string",
+                        "title": " Prefix ",
+                        "default": "",
+                        "examples": [
+                            "v!"
+                        ],
+                        "pattern": "^(.*)$"
+                    },
+                    "case sensitive": {
+                        "$id": "#/properties/commands/properties/case sensitive",
+                        "type": "boolean",
+                        "title": " Case sensitive ",
+                        "default": false,
+                        "examples": [
+                            false
+                        ]
+                    }
+                }
+            },
+            "operator users": {
+                "$id": "#/properties/operator users",
+                "type": "array",
+                "title": " Operator users ",
+                "items": {
+                    "$id": "#/properties/operator users/items",
+                    "type": "string",
+                    "title": " Operator",
+                    "default": "",
+                    "examples": [
+                        "224260367696658432",
+                        "132565259159470080"
+                    ],
+                    "pattern": "^(.*)$"
+                }
+            }
+        }
+    }
+}

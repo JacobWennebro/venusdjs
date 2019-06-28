@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+    margin: 0;
+    overflow: none;
+    width: 100vw;
+    font-family: 'Roboto';
+}
+.wrapper {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-top: 5em;
+    user-select: none;
+}
+.wrapper #instance {
+    width: 20%;
+    height: auto;
+    margin: 1%;
+    display: inline-block;
+    padding: 0.5em;
+    background: #333;
+    border-radius: 1em;
+    -webkit-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+    box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.15);
+}
+h1#title {
+    color: #FFF;
+}

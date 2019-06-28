@@ -1,0 +1,78 @@
+body {
+    font-family: 'Roboto', 'sans-serif';
+    text-transform: uppercase;
+    user-select: none;
+    background: #222;
+}
+.editor {
+    color: #FFF;
+    animation: fadeIn 1s forwards;
+    margin-top: 5em;
+}
+.editor * {
+    border-color: #333 !important;
+}
+input, select {
+    padding: 0.5em;
+    border: 0;
+    color: #00caff;
+    background: #555;
+    border-radius: 5em;
+    outline:none;
+}
+.row:nth-child(even) {
+    margin-top: 1em;
+    padding: 1em 0;
+}
+span#changes {
+  color: #FFF;
+  font-size: 0.65rem;
+  margin-left: 1em;
+}
+span#changes > a {
+  color: yellow;
+}
+#header {
+  z-index: 100;
+  padding: 1em 0;
+  position: fixed;
+  background: #222;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: auto;
+  border-bottom: 1px solid #333;
+}
+#header button, select {
+    margin: 0 0 0 1em;
+}
+button {
+    background: #00caff;
+    color: #222;
+    border-radius: 5em;
+    border: 0;
+    color: #FFF;
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #222; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #00caff; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00caff; 
+}

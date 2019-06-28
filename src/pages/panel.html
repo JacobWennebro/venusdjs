@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style id="sass"></style>
+        <script src="https://kit.fontawesome.com/79d4f2646b.js"></script>
+    </head>
+    <body>
+        
+        <header>
+            <div id="title">
+                <h1 class="title-text panel-name">VENUS PANEL</h1>
+            </div>
+            <div id="headerButtons">
+                <ul>
+                    <li style="display: none" title="Coming Soon"><i class="fas fa-cog"></i></li>
+                    <li title="Github Repo & Documentation"><a href="https://github.com/JacobWennebro/venusdjs" target="_blank"><i class="fab fa-github"></a></i></li>
+                    <li title="Community Discord"><a href="https://discord.gg/Rwa6qT3" target="_blank"><i class="fab fa-discord"></a></i></li>
+                </ul>
+            </div>
+            <span><a href="/api/signout">Sign out</a></span>
+        </header>
+
+        <div class="sidebar">
+
+            <div class="bot-profile">
+                <div id="botIconWrapper">
+                    <div id="botStatus"></div>
+                    <img id="botIcon">
+                </div>
+                <div id="info">
+                    <p>
+                        <span id="botTag"></span>
+                        <br/>
+                        Activity <a onclick="page('html/stats.html')" id="botStartedAt" href="/panel#statistics"></a>
+                        <br/>
+                        API Ping <a onclick="page('html/stats.html')" id="botPing" href="/panel#statistics"></a>
+                    </p>
+                </div>
+            </div>
+
+            <ul id="pages">
+                <a onclick="page('html/stats.html')" href="#statistics"><li><i class="fas fa-chart-line"></i> statistics</li></a>
+                <a onclick="page('html/addons.html')" href="#addons"><li><i class="fas fa-puzzle-piece"></i> add-ons</li></a>
+                <a onclick="page('html/config.html')" href="#config"><li><i class="fas fa-sliders-h"></i> configuration</li></a>
+                <a style="display: none" onclick="page('html/logs.html')" href="#logs"><li><i class="fas fa-comments"></i> logs</li></a>
+                <a style="display: none" onclick="page('html/console.html')" href="#console"><li><i class="fas fa-terminal"></i> console</li></a>
+                <a onclick="page('html/guilds.html')" href="#guilds"><li><i class="fas fa-server"></i> guilds</li></a>
+            </ul>
+        </div>
+
+        <iframe id="pageDisplay"></iframe>
+
+        <script>
+
+            function page(url) {
+                let display = document.getElementById('pageDisplay');
+
+                display.src = url;
+            }
+
+            if(document.location.hash !== "") {
+                let elm = document.querySelector(`a[href="${document.location.hash}"`);
+                let onclick = elm.getAttribute('onclick');
+                let path = onclick.replace("page('", '').split('');
+                path.pop();
+                path.pop();
+                page(path.join(''));
+            }
+            else {
+                page('html/stats.html');
+            }
+
+            fetch('/addon-api/all').then(res => { return res.json() }).then(addons => {
+                
+                addons.forEach(addon => {
+                    if(addon.hasPage == false) return;
+
+                    let pages = document.getElementById('pages');
+                    
+                    let link = document.createElement('a')
+                        link.href=`#${addon.name.toLowerCase()}-${addon.session_id}@addon`
+                        link.innerHTML = `<li><i class="fas fa-vial" title="Third-party addon"></i> ${addon.name}</li>`
+                        link.setAttribute('onclick', `page('addon-api/pages/${addon.name.toLowerCase()}-${addon.session_id}')`)
+
+                    pages.appendChild(link);
+
+                });
+            }).catch(err => {
+                console.log(err);   
+            });
+
+            function msToTime(duration) {
+                let milliseconds = parseInt((duration % 1000) / 100),
+                    seconds = Math.floor((duration / 1000) % 60),
+                    minutes = Math.floor((duration / (1000 * 60)) % 60),
+                    hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+                return hours + "h " + minutes + "m " + seconds + "s";
+            }
+
+            fetch('/bot-api/info').then(res => { return res.json() }).then(info => {
+                
+                if(info.err == true) {
+                    alert('You must be signed in to utilize the Venus Panel');
+                    document.location.href = '/';
+                }
+
+                if(info.startedAt !== 'offline') {
+                    let d = new Date(info.startedAt);
+                    console.log(info.startedAt);
+                    setInterval(()=>{
+                        document.getElementById('botStartedAt').innerText = msToTime(new Date - d);
+                    },1000)
+                }
+                else {
+                    document.getElementById('botStartedAt').innerText = '00h 00m 00s';
+                }
+                
+                document.getElementById('botTag').innerText = info.tag;
+                document.getElementById('botIcon').src = info.icon;
+                document.getElementById('botPing').innerText = Math.round(info.ping) + 'ms';
+
+                let status = document.getElementById('botStatus');
+
+                if(info.presence.status === 'online') {
+                    status.style.backgroundColor = '#43B581';
+                }
+                else if(info.presence.status === 'dnd') {
+                    status.style.backgroundColor = '#F04747';
+                    info.presence.status = 'do not disturb';
+                }
+                else if(info.presence.status === 'idle') {
+                    status.style.backgroundColor = '#FAA61A';
+                }
+                else {
+                    status.style.backgroundColor = '#747F8D';
+                }
+
+                status.title = info.presence.status;
+
+            });
+        
+        </script>
+    </body>
+</html>
