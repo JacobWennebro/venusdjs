@@ -8,6 +8,10 @@ After a couple sleepless nights we're ready to release this for the Discord Hack
 
 Hello there Discord employee, got limited time? [Here](https://github.com/JacobWennebro/venusdjs-addons) you can find some example addons to load into your VenusDJS bot 😊
 
+## Requirements
+* Node.js
+* Redis Database
+
 ## Installation
 
 Download the repository & install the dependencies using the node package manager, (npm)

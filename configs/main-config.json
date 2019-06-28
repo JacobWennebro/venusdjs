@@ -11,9 +11,9 @@
             "status": "online"
         },
         "database": {
-            "host": "mpvp.pro",
+            "host": "",
             "port": 6379,
-            "password": "747e1300bbcf2d5555bcff0699b914040e3203924c46af855c3298a4feed5eec"
+            "password": ""
         },
         "log global chat": true,
         "vdjs embed theme color": "#FFFFFF",
