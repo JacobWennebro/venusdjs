@@ -4,6 +4,8 @@ After a couple sleepless nights we're ready to release this for the Discord Hack
 
 ~ Jaaack#0069, 00#1337, James.#3168, broken-admin#4243, Looda.#4618
 
+![alt text](https://i.gyazo.com/9168847b2ba3502c04e6081eb9fb831c.gif)
+
 ## Installation
 
 Download the repository & install the dependencies using the node package manager, (npm)
