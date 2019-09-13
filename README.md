@@ -1,3 +1,5 @@
+## DISCONTINUED & UNSUPPORTED, feel free to do whatever you want with it
+
 # Venus - a Discord.js framework 🤖
 
 After a couple sleepless nights we're ready to release this for the Discord Hack Week event. The idea of Venus is something our team has visioned making for a long time, mainly for the efficiency of our own bot. Not everything is perfect as of yet but I think we managed pretty well on the four days we were given. This is definitely  a project we wanna make long-term.
