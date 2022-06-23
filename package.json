@@ -18,7 +18,7 @@
     "generate-password": "^1.4.2",
     "generate-schema": "^2.6.0",
     "ip": "^1.1.5",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "redis": "^2.8.0",
     "sass": "^1.21.0",
     "sharp": "^0.22.1",
