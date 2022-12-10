@@ -14,7 +14,7 @@
     "cookie-parser": "^1.4.4",
     "discord.js": "^11.5.1",
     "ejs": "^2.6.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "generate-password": "^1.4.2",
     "generate-schema": "^2.6.0",
     "ip": "^1.1.5",
